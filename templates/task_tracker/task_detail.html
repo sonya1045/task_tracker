@@ -1,10 +1,38 @@
 {% extends 'base.html' %}
 
 {%  block content %}
+{% load static %}
 
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
     <p> {{task.title}} </p>
     <p> {{task.discription}} </p>
+    <h3>Comments</h3>
+    {% for comment in task.comments.all %}
+        <p>{{ comment.author.username }}:</p>
+        <p>{{ comment.content }}</p>
+        <p>{{ comment.created_at }}</p>
+    {% empty %}
+    <p>Коментарів немає</p>
+    {% endfor %}
+    <p>Додати коментар</p>
+    <form method="post" action="{% url 'task-detail' task.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        
+        <button type="submit">Відправити</button>
+    </form>
+</body>
+</html>
+    
 
 
 {% endblock %}
