@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {%  block content %}
+{% load custom_tags %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -17,8 +18,25 @@
     <p> {{task.discription}} </p>
     <h3>Comments</h3>
     {% for comment in task.comments.all %}
-        <p>{{ comment.author.username }}:</p>
-        <p>{{ comment.content }}</p>
+        <p>{{ comment.author.username }}:
+        {{ comment.content }}</p>
+
+        {% if comment.media %}
+            {% if comment.media.url|endswith:".jpg" or comment.media.url|endswith:".png" or comment.media.url|endswith:".jpeg" %}
+                <img src="{{ comment.media.url }}">
+            {% elif comment.media.url|endswith:".mp4" %}
+                <video width="320" height="240" controls>
+                    <source src="{{ comment.media.url }}" type="video/mp4">
+                    video no load(
+                </video>
+            {% else %}
+                <a href="{{ comment.media.url }}">Load</a>
+
+            {% endif %}
+
+
+        {% endif %}
+
         <p>{{ comment.created_at }}</p>
     {% empty %}
     <p>Коментарів немає</p>
