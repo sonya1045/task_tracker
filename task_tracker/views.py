@@ -60,12 +60,12 @@ class TaskUpdateView(LoginRequiredMixin, UserIsOwnerMixin, UpdateView):
 
 class CommentDeleteView(DeleteView):
     model = Comment
-    template_name = 'tasks/delete_comment.html'
+    template_name = 'task_tracker/delete_comment.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(author=self.request.user)
 
     def get_success_url(self):
-        return reverse_lazy('tasks:task-detail', kwargs={'pk': self.object.task.pk})
+        return reverse_lazy('task-detail', kwargs={'pk': self.object.task.pk})
 

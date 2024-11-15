@@ -1,13 +1,31 @@
 body{
-    background-image: linear-gradient(to bottom, rgb(255, 240, 105), rgb(75, 247, 75));
+    background: linear-gradient(#95f0b2, #e0e247);
     background-position: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    font-size: 16px;
 }
 
-button{
+button {
+    margin-left: 10px;
+    font-size: 15px;
+    padding: 10px;
     border-radius: 15px;
-    width: max-content;
-    height: max-content;
+    background-color: #95f0b2;
+    width: 150px;
+    height: 45px;
+}
+
+button:hover {
+    background-color: #45a049; /* Інший колір фону при наведенні */            
+}
+
+form{
+    font-size: 25px;
+}
+
+a{
+    font-size: 18px;
+
 }

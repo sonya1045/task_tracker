@@ -17,15 +17,18 @@
     <p> {{task.title}} </p>
     <p> {{task.discription}} </p>
     <h3>Comments</h3>
+    <hr>
+
     {% for comment in task.comments.all %}
+    <p><a href="{% url 'comment-delete' comment.id%}">Delete all comments</a></p>
         <p>{{ comment.author.username }}:
         {{ comment.content }}</p>
 
         {% if comment.media %}
             {% if comment.media.url|endswith:".jpg" or comment.media.url|endswith:".png" or comment.media.url|endswith:".jpeg" %}
-                <img src="{{ comment.media.url }}">
+                <img src="{{ comment.media.url }}" width="180" height="120">
             {% elif comment.media.url|endswith:".mp4" %}
-                <video width="320" height="240" controls>
+                <video width="150" height="120" controls>
                     <source src="{{ comment.media.url }}" type="video/mp4">
                     video no load(
                 </video>
@@ -33,11 +36,9 @@
                 <a href="{{ comment.media.url }}">Load</a>
 
             {% endif %}
-
-
-        {% endif %}
-        <p><a href="{% url 'comment-delete' comment.id%}">Delete comment</a></p>
+        {% endif %}       
         <p>{{ comment.created_at }}</p>
+        <p>-------------------------------</p>
     {% empty %}
     <p>Коментарів немає</p>
     {% endfor %}
