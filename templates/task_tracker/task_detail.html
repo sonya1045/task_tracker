@@ -36,7 +36,7 @@
 
 
         {% endif %}
-
+        <p><a href="{% url 'comment-delete' comment.id%}">Delete comment</a></p>
         <p>{{ comment.created_at }}</p>
     {% empty %}
     <p>Коментарів немає</p>
